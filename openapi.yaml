@@ -60,7 +60,7 @@ paths:
         content:
           'application/json':
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserSignup'
         required: true
       responses:
         201:
@@ -68,7 +68,7 @@ paths:
           content: 
             'application/json':
               schema:
-                $ref: '#/components/schemas/UserSignup'
+                $ref: '#/components/schemas/User'
         400:
           $ref: '#/components/responses/BadRequest'
   /user/login:
