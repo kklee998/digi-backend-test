@@ -36,7 +36,7 @@ const userListHandler = async (c, req, res) => {
       .from('users')
       .modify((qb) => {
         if (q) {
-          qb.where('name', 'ILIKE', q);
+          qb.where('name', 'ILIKE', `%${q}%`);
         }
       });
     return res.status(200).json(userList);
@@ -110,7 +110,7 @@ const userLoginHandler = async (c, req, res) => {
   }
   try {
     const { email, password } = body;
-    const [user] = await knex.table('users').select('name', 'password').where('email', 'ILIKE', `%${email}%`);
+    const [user] = await knex.table('users').select('name', 'password').where('email', '=', email);
     if (!user) {
       return res.status(400).json(errorFormatter('2', 'Invalid login', 'The provided email/password is incorrect'));
     }
