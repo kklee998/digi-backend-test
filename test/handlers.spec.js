@@ -35,7 +35,14 @@ describe('GET /user', () => {
         name: 'U3',
         email: 'U3@mail.com',
         password: 'BAD UNHASHED PASSWORD',
-      }]).then(() => done());
+      },
+      {
+        id: uuidv4(),
+        name: 'Longer User Name to Test',
+        email: 'U4@mail.com',
+        password: 'BAD UNHASHED PASSWORD',
+      },
+      ]).then(() => done());
     });
 
     it('it should has status code 200, and list all the Users', (done) => {
@@ -61,6 +68,21 @@ describe('GET /user', () => {
           res.body.forEach((e) => {
             expect(e.name).to.eql('U1');
             expect(e.email).to.eql('U1@mail.com');
+          });
+          return done();
+        });
+    });
+    it('it should has status code 200 and can partial match the query string', (done) => {
+      supertest(app)
+        .get('/user?q=long')
+        .set('Authorization', `Bearer ${TEST_AUTH}`)
+        .expect(200)
+        .end((err, res) => {
+          if (err) return done(err);
+
+          res.body.forEach((e) => {
+            expect(e.name).to.eql('Longer User Name to Test');
+            expect(e.email).to.eql('U4@mail.com');
           });
           return done();
         });
