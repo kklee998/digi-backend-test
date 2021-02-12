@@ -6,7 +6,7 @@ const fs = require('fs');
 const jwt = require('./jwt');
 const api = require('./api');
 const {
-  userListHandler, userCreateHandler, userLoginHandler, userLogoutHandler,
+  userListHandler, userCreateHandler, userLoginHandler,
 } = require('./handlers');
 
 const swaggerDocument = yaml.load(fs.readFileSync('./openapi.yaml', 'utf8'));
@@ -15,7 +15,6 @@ api.register({
   userList: userListHandler,
   userCreate: userCreateHandler,
   userLogin: userLoginHandler,
-  userLogout: userLogoutHandler,
   validationFail: (c, req, res) => res.status(400).json({ err: c.validation.errors }),
   notFound: (c, req, res) => res.status(404).json({ err: 'not found' }),
   unauthorizedHandler: (c, req, res) => res.status(401).json({ err: 'Please login' }),

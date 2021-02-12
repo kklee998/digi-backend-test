@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "npm run migrate:up && node ./bin/www",
     "dev": "nodemon ./bin/www",
+    "migrate:up": "npx knex migrate:up",
     "test": "mocha"
   },
   "dependencies": {

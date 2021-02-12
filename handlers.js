@@ -132,8 +132,7 @@ const userLoginHandler = async (c, req, res) => {
     return res.status(500).json(errorFormatter('99999', 'Unknown Error', 'Unknown Error'));
   }
 };
-const userLogoutHandler = async (c, req, res) => res.status(200).json({ result: 'ok' });
 
 module.exports = {
-  userListHandler, userCreateHandler, userLoginHandler, userLogoutHandler,
+  userListHandler, userCreateHandler, userLoginHandler,
 };
