@@ -1,0 +1,16 @@
+# docker-compose.yml
+version: '3'
+services:
+  digi-dev:
+    image: "postgres:12"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data/ # persist data even if container shuts downvolumes:
+
+volumes:
+  db-data: # named volumes can be managed easier using docker-compose

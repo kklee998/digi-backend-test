@@ -1,0 +1,139 @@
+openapi: 3.0.1
+info:
+  title: Digi Backend
+  description: 'Swagger for Digi Fullstack Test'
+  version: 1.0.0
+tags:
+- name: User
+  description: Operations about user
+servers:
+  - url: http:localhost:3000
+paths:
+  /user:
+    get:
+      parameters:
+          - in: query
+            name: q
+            schema:
+              type: string
+            description: Querystring to filter by name
+      tags:
+        - User
+      summary: Get Users
+      operationId: userList
+      responses:
+        default:
+          description: successful operation
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+      security:
+        - jwtAuth: []
+    post:
+      tags:
+      - User
+      summary: Create user
+      description: Registers a new user.
+      operationId: userCreate
+      requestBody:
+        description: Created user object
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        201:
+          description: successful operation
+          content: 
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/BadRequest'
+  /user/login:
+    post:
+      tags:
+      - User
+      summary: Logs user into the system
+      operationId: userLogin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        200:
+          description: successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  accessToken:
+                    type: string
+        400:
+          $ref: '#/components/responses/BadRequest'
+components:
+  # Descriptions of common components
+  responses:
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The specified body is incomplete/invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+    UserLogin:
+      type: object
+      properties:
+        password:
+          type: string
+          format: password
+        email:
+          type: string
+          format: email
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+        message:
+          type: string
+  # securitySchemes:
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
