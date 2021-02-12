@@ -12,6 +12,7 @@ const {
 const swaggerDocument = yaml.load(fs.readFileSync('./openapi.yaml', 'utf8'));
 
 api.register({
+  apiRoot: (c, req, res) => res.status(200).json({ message: 'Welcome to API root' }),
   userList: userListHandler,
   userCreate: userCreateHandler,
   userLogin: userLoginHandler,

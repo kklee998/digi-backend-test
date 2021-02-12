@@ -12,6 +12,20 @@ servers:
   - url: http://localhost:3000/
     description: local server
 paths:
+  /root:
+    get:
+      summary: API root
+      operationId: apiRoot
+      responses:
+        200:
+          description: API root accessible
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string       
   /user:
     get:
       parameters:
