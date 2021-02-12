@@ -1,3 +1,4 @@
+const inProduction = process.env.NODE_ENV === 'production';
 module.exports = {
 
   client: 'pg',
@@ -8,6 +9,7 @@ module.exports = {
     password: 'postgres',
     database: 'dev',
   },
+  ssl: !!inProduction,
   migrations: {
     directory: './db/migrations',
     tableName: 'knex_migrations',
