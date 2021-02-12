@@ -7,7 +7,7 @@ tags:
 - name: User
   description: Operations about user
 servers:
-  - url: https://api.example.com/v1
+  - url: https://backend-test-kk.herokuapp.com/
     description: Production server
   - url: http://localhost:3000/
     description: local server
