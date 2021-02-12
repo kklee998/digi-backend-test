@@ -68,7 +68,7 @@ paths:
           content: 
             'application/json':
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/UserSignup'
         400:
           $ref: '#/components/responses/BadRequest'
   /user/login:
@@ -130,6 +130,17 @@ components:
         email:
           type: string
           format: email
+    UserSignup:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
     UserLogin:
       type: object
       properties:
