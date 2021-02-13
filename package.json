@@ -1,6 +1,6 @@
 {
-  "name": "digi-backend",
-  "version": "0.0.0",
+  "name": "digi-backend-test",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "npm run migrate:up && node ./bin/www",
