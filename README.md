@@ -1,5 +1,11 @@
 # Digi Backend Test
 
+# Production URL
+### Api Root
+https://backend-test-kk.herokuapp.com/
+### Swagger URL
+https://backend-test-kk.herokuapp.com/swagger
+
 # Installation
 ```bash
 npm ci
